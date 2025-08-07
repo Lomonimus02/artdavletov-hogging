@@ -1,0 +1,623 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Oswald', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Desktop styles - show text logo, hide image logo */
+@media (min-width: 769px) {
+  .mobile-show-logo {
+    display: none !important;
+  }
+
+  .mobile-hide-text-logo {
+    display: inline !important;
+  }
+
+  /* Desktop projects layout - hide mobile grid on desktop */
+  .mobile-projects-grid {
+    display: none !important;
+  }
+
+  .mobile-hide-desktop-grid {
+    display: grid !important;
+  }
+
+  /* Hide About page heading on desktop */
+  .mobile-hide-about-heading {
+    display: none !important;
+  }
+
+  /* Reduce top padding on desktop About page hero section */
+  .mobile-about-hero {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Further reduce spacing for desktop About page content */
+  .desktop-about-content {
+    margin-top: -2rem !important;
+  }
+}
+
+/* Mobile-specific styles - Apply only to mobile devices */
+@media (max-width: 768px) {
+  /* Hero Section Mobile Fixes */
+  .mobile-hero-bg {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: scroll !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important; /* Dynamic viewport height for mobile browsers */
+  }
+
+  /* Ensure full width coverage on mobile */
+  .mobile-hero-container {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Mobile hero text adjustments */
+  .mobile-hero-title {
+    font-size: 2.5rem !important; /* Smaller than desktop but still impactful */
+    line-height: 1.1 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .mobile-hero-subtitle {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Contact Section Mobile Fixes */
+  .mobile-contact-section {
+    min-height: auto !important;
+    height: auto !important;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Hide About page heading on mobile */
+  .mobile-hide-about-heading {
+    display: none !important;
+  }
+
+  /* Mobile project description formatting */
+  .mobile-project-description {
+    text-align: right !important;
+    line-height: 1.6 !important;
+  }
+
+  .mobile-project-description div {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* About page mobile spacing fixes */
+  .mobile-about-hero {
+    padding-top: 1rem !important; /* Further reduced from 2rem to 1rem */
+    padding-bottom: 1.5rem !important;
+  }
+
+  .mobile-about-heading-container {
+    margin-bottom: 1rem !important; /* Further reduced from 2rem to 1rem */
+  }
+
+  /* About page main heading typography enhancements */
+  .mobile-about-main-heading {
+    font-weight: 900 !important; /* Bolder - increased from font-bold */
+    font-size: 1.25rem !important; /* Match other paragraphs (text-xl) for consistency */
+    line-height: 1.2 !important;
+  }
+
+  /* Scroll animation for project items */
+  .project-scroll-animate {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .project-hidden {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+
+  .project-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Add a slight delay for staggered animation effect */
+  .project-scroll-animate:nth-child(even) {
+    transition-delay: 0.1s;
+  }
+
+  .project-scroll-animate:nth-child(3n) {
+    transition-delay: 0.2s;
+  }
+
+  /* Mobile contact grid adjustments */
+  .mobile-contact-grid {
+    gap: 2rem !important;
+  }
+
+  /* Mobile contact info text sizing */
+  .mobile-contact-heading {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .mobile-contact-text {
+    font-size: 1.125rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Mobile form adjustments */
+  .mobile-form-container {
+    padding: 0 !important;
+  }
+
+  .mobile-form-input {
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem !important;
+  }
+
+  .mobile-form-label {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .mobile-form-button {
+    padding: 1rem 2rem !important;
+    font-size: 1.125rem !important;
+  }
+
+  /* Prevent horizontal overflow */
+  .mobile-no-overflow {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* Mobile navigation adjustments */
+  .mobile-nav-logo {
+    font-size: 0.875rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Mobile projects grid adjustments */
+  .mobile-projects-text {
+    font-size: 0.875rem !important;
+    padding: 1rem !important;
+  }
+
+  /* Mobile logo styles */
+  .mobile-logo {
+    height: 4rem !important; /* 64px height for mobile - further increased from 48px */
+    width: auto !important;
+    max-width: 400px !important; /* Further increased max-width for larger logo */
+    object-fit: contain !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    /* Force transparent background for PNG images */
+    mix-blend-mode: normal !important;
+  }
+
+  /* Specific fix for Next.js Image component transparency */
+  .mobile-logo img {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* Force transparency on the image element itself */
+  img.mobile-logo {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  .mobile-logo-container {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+  }
+
+  /* Mobile navigation styling - БЕЛЫЙ на главной и контактах, ЧЕРНЫЙ на проектах и о нас */
+  @media (max-width: 768px) {
+    .mobile-logo-container span {
+      color: #000000 !important; /* ЧЕРНЫЙ текст на мобильных по умолчанию */
+    }
+
+    /* Черный цвет для проектов и о нас (базовый стиль) */
+    .mobile-menu-button {
+      color: #000000 !important; /* ЧЕРНЫЙ для кнопки меню на мобильных по умолчанию */
+    }
+
+    .mobile-menu-button:hover {
+      color: #000000 !important; /* ЧЕРНЫЙ при наведении на мобильных по умолчанию */
+    }
+
+    .mobile-menu-icon {
+      background-color: #000000 !important; /* ЧЕРНЫЙ для иконок меню на мобильных по умолчанию */
+    }
+
+    /* Белый цвет для главной и контактов страниц (переопределяет базовый) */
+    body[data-page="home"] .mobile-menu-button,
+    body[data-page="contacts"] .mobile-menu-button {
+      color: #ffffff !important; /* БЕЛЫЙ для кнопки меню на главной и контактах */
+    }
+
+    body[data-page="home"] .mobile-menu-button:hover,
+    body[data-page="contacts"] .mobile-menu-button:hover {
+      color: #ffffff !important; /* БЕЛЫЙ при наведении на главной и контактах */
+    }
+
+    body[data-page="home"] .mobile-menu-icon,
+    body[data-page="contacts"] .mobile-menu-icon {
+      background-color: #ffffff !important; /* БЕЛЫЙ для иконок меню на главной и контактах */
+    }
+
+    /* КРИТИЧЕСКИ ВАЖНО: Черный цвет для иконок когда меню открыто - МАКСИМАЛЬНЫЙ приоритет */
+    /* Используем максимальную специфичность для переопределения всех предыдущих правил */
+    body[data-page="home"] .mobile-menu-icon.bg-black,
+    body[data-page="contacts"] .mobile-menu-icon.bg-black,
+    body[data-page="projects"] .mobile-menu-icon.bg-black,
+    body[data-page="about"] .mobile-menu-icon.bg-black,
+    .mobile-menu-icon.bg-black {
+      background-color: #000000 !important; /* ЧЕРНЫЙ когда меню открыто на ЛЮБОЙ странице */
+    }
+  }
+
+  /* Hide text logo on mobile, show image logo */
+  .mobile-hide-text-logo {
+    display: none !important;
+  }
+
+  .mobile-show-logo {
+    display: block !important;
+  }
+
+  /* Mobile hero text alignment changes */
+  .mobile-hero-text-container {
+    text-align: left !important;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+    max-width: none !important;
+    margin-top: -10vh !important; /* Move text higher */
+  }
+
+  .mobile-hero-title-left {
+    text-align: left !important;
+  }
+
+  .mobile-hero-subtitle-left {
+    text-align: left !important;
+  }
+
+  /* Mobile stats section optimization */
+  .mobile-stats-section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .mobile-stats-grid {
+    gap: 1rem !important; /* Significantly reduced gap */
+  }
+
+  .mobile-stats-text {
+    text-align: right !important;
+    font-size: 1.25rem !important; /* Smaller text for more compact layout */
+    line-height: 1.3 !important;
+  }
+
+  /* Mobile menu full screen coverage */
+  .mobile-menu-full-width {
+    width: 100vw !important;
+    right: 0 !important;
+    left: 0 !important;
+  }
+
+  /* Mobile menu icon color overrides */
+  .mobile-menu-button {
+    /* Ensure proper z-index for mobile */
+    z-index: 50 !important;
+  }
+
+  .mobile-menu-icon {
+    /* Force white color when menu is closed on mobile */
+    transition: all 0.5s ease-in-out !important;
+  }
+
+  /* Mobile projects section redesign */
+  .mobile-projects-section {
+    /* Override desktop grid layout */
+    display: block !important;
+  }
+
+  .mobile-projects-grid {
+    /* Single column layout */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin-bottom: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Override any hidden classes on mobile projects grid */
+  .mobile-projects-section .mobile-projects-grid {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .mobile-project-item {
+    /* Full width, square aspect ratio photos */
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    height: 100vw !important; /* Square aspect ratio: width = height */
+    position: relative !important;
+    overflow: hidden !important;
+    cursor: default !important; /* Remove pointer cursor */
+    pointer-events: none !important; /* Remove click functionality */
+  }
+
+  .mobile-project-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .mobile-project-text {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: white !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    line-height: 1.3 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    z-index: 10 !important;
+  }
+
+  .mobile-project-text-left {
+    left: 0 !important;
+    padding-left: 2rem !important;
+    padding-right: 1rem !important;
+    text-align: left !important;
+    max-width: calc(50% - 1rem) !important;
+  }
+
+  .mobile-project-text-right {
+    right: 0 !important;
+    padding-right: 2rem !important;
+    padding-left: 1rem !important;
+    text-align: right !important;
+    max-width: calc(50% - 1rem) !important;
+    /* Improved positioning for better right alignment */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: auto !important;
+  }
+
+  /* Hide desktop text blocks on mobile */
+  .mobile-hide-text-blocks {
+    display: none !important;
+  }
+
+  /* Mobile projects button - narrower width */
+  .mobile-projects-button {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    font-size: 1.25rem !important; /* Smaller text on mobile */
+    max-width: 280px !important; /* Limit maximum width */
+  }
+
+  /* Mobile projects button section - centered in white background */
+  .mobile-projects-button-section {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 160px !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Mobile projects button container - remove extra margins */
+  .mobile-projects-button-container {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Override section bottom padding for mobile projects section */
+  .mobile-projects-section {
+    padding-bottom: 0 !important;
+  }
+
+  /* Projects page specific mobile styling */
+  .mobile-project-item {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+
+  /* Ensure projects page mobile items are clickable */
+  .mobile-projects-section .mobile-project-item {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+
+  /* Fix projects page heading/filter positioning on mobile - keep on same line */
+  .projects-page-header .flex.items-center.justify-center.relative {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .projects-page-header .filter-dropdown {
+    position: static !important;
+    transform: none !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Reduce heading size on mobile for projects page only */
+  .projects-page-header .text-8xl {
+    font-size: 3rem !important; /* Smaller to fit with filter icon */
+    line-height: 1 !important;
+    flex-grow: 1 !important;
+    text-align: left !important;
+  }
+
+  /* Keep project photo sizes but ensure they fit on mobile */
+  .projects-grid .w-80 {
+    width: 16rem !important; /* Slightly smaller but still substantial */
+    flex-shrink: 0 !important;
+  }
+
+  /* Also reduce text sizes on mobile for projects page only */
+  .projects-grid .text-3xl {
+    font-size: 1.25rem !important; /* Smaller text on mobile */
+    line-height: 1.2 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+
+  /* Ensure project info container has proper spacing and doesn't overflow */
+  .projects-grid .flex-grow {
+    padding: 0.5rem !important;
+    min-width: 0 !important; /* Allow flex item to shrink below content size */
+    overflow: hidden !important;
+  }
+
+  /* Keep original layout but fix text overflow */
+  .projects-grid .space-y-4 {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Show mobile projects layout, hide desktop grid */
+  .mobile-projects-grid {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Force mobile projects grid to show with maximum specificity */
+  section.mobile-projects-section .mobile-projects-grid {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex-direction: column !important;
+  }
+
+  .mobile-hide-desktop-grid {
+    display: none !important;
+  }
+
+  /* Specific text line breaking optimizations for mobile project overlays */
+  .mobile-project-text-optimized-1 {
+    /* For "Молодая десятка из Москвы и Казани" - reduce from 6 to 4 lines */
+    font-size: 1.4rem !important;
+    line-height: 1.2 !important;
+    word-spacing: -0.1em !important;
+  }
+
+  .mobile-project-text-optimized-7 {
+    /* For "коммерцию и частные дома по всей России" - reduce from 6 to 5 lines */
+    font-size: 1.4rem !important;
+    line-height: 1.25 !important;
+    word-spacing: -0.05em !important;
+  }
+
+  /* Mobile "О НАС" project card styling */
+  .mobile-project-about-link {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .mobile-project-about-link:hover {
+    transform: scale(1.02) !important;
+  }
+
+  .mobile-project-text-center {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(-50%) !important;
+    text-align: center !important;
+    max-width: 80% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    color: white !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    line-height: 1.3 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    z-index: 10 !important;
+  }
+
+  .mobile-project-about-text {
+    font-size: 2rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.2em !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(-50%) !important;
+    text-align: center !important;
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    z-index: 10 !important;
+  }
+
+  .mobile-project-about-text::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -4px !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 2px !important;
+    background-color: white !important;
+    transition: width 0.5s ease-out !important;
+  }
+
+  .mobile-project-about-link:hover .mobile-project-about-text::after {
+    width: 100% !important;
+  }
+}
