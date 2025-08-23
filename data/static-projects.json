@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "title": "ЧАСТНЫЙ ДОМ В ЖУКОВКЕ, МО",
+    "category": "Частный дом",
+    "type": "Эскизный проект",
+    "city": "Московская область",
+    "area": "850 м²",
+    "year": "2024",
+    "image": "/images/project-1.JPG",
+    "description": "",
+    "section": "architecture",
+    "gallery": [
+      "/images/project-1.JPG",
+      "/images/admin/1755986134306_IMG_6255.JPG",
+      "/images/admin/1755986140797_IMG_6256.JPG",
+      "/images/admin/1755989069259_IMG_6257.JPG",
+      "/images/admin/1755989174496_IMG_6259.JPG",
+      "/images/admin/1755989198194_IMG_6258.JPG",
+      "/images/admin/1755989203033_IMG_6269.JPG",
+      "/images/admin/1755989207701_IMG_6274.JPG",
+      "/images/admin/1755989213353_IMG_6277.JPG"
+    ]
+  }
+]

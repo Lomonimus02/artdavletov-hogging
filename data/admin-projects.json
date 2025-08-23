@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "title": "частный дом в Екатеринбурге",
+    "category": "частный дом",
+    "type": "Эскизный проект",
+    "city": "екатеринбург",
+    "area": "370",
+    "year": "2022",
+    "image": "/images/admin/1755971389453_IMG_7186.JPG",
+    "description": "",
+    "section": "architecture",
+    "gallery": [
+      "/images/admin/1755971389453_IMG_7186.JPG",
+      "/images/admin/1755971401100_IMG_7188.JPG",
+      "/images/admin/1755971413550_IMG_7187.JPG",
+      "/images/admin/1755971420288_IMG_7189.JPG",
+      "/images/admin/1755971425683_IMG_7190.JPG"
+    ]
+  }
+]
