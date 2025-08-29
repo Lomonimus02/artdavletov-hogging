@@ -1,0 +1,1284 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Oswald', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+/* Desktop scroll behavior */
+@media (min-width: 769px) {
+  html, body {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Desktop styles - show text logo, hide image logo */
+@media (min-width: 769px) {
+  .mobile-show-logo {
+    display: none !important;
+  }
+
+  .mobile-hide-text-logo {
+    display: inline !important;
+  }
+
+  /* Desktop hero text positioning */
+  .hero-text-container {
+    position: absolute !important;
+    bottom: 4rem !important;
+    left: 3rem !important;
+    right: 3rem !important;
+    max-width: 1000px !important;
+    transform-origin: bottom left !important;
+  }
+
+  /* Desktop projects layout - hide mobile grid on desktop */
+  .mobile-projects-grid {
+    display: none !important;
+  }
+
+  .mobile-hide-desktop-grid {
+    display: grid !important;
+  }
+
+  /* Desktop projects grid animation */
+  .desktop-project-animate {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .desktop-project-hidden {
+    opacity: 0;
+    transform: translateY(60px) scale(0.9);
+  }
+
+  .desktop-project-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Hide About page heading on desktop */
+  .mobile-hide-about-heading {
+    display: none !important;
+  }
+
+  /* Reduce top padding on desktop About page hero section */
+  .mobile-about-hero {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Further reduce spacing for desktop About page content */
+  .desktop-about-content {
+    margin-top: -2rem !important;
+  }
+
+  /* Desktop Services Section - Full Screen Photos with Scroll Snap */
+  .services-section {
+    scroll-snap-type: y mandatory !important;
+  }
+
+  .services-photo {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+
+
+  /* Ensure smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth !important;
+  }
+
+  /* Override any conflicting height styles for desktop */
+  .services-photo.md\:h-screen {
+    height: 100vh !important;
+  }
+
+  /* Ensure images fill the full viewport height */
+  .services-photo img {
+    height: 100vh !important;
+    width: 100vw !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  /* Ensure text overlays are positioned correctly */
+  .services-photo .absolute {
+    position: absolute !important;
+    z-index: 10 !important;
+  }
+}
+
+/* Mobile-specific styles - Apply only to mobile devices */
+@media (max-width: 768px) {
+  /* Hero Section Mobile Fixes */
+  .mobile-hero-bg {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: scroll !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important; /* Dynamic viewport height for mobile browsers */
+  }
+
+  /* Ensure full width coverage on mobile */
+  .mobile-hero-container {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Mobile hero text adjustments */
+  .mobile-hero-title {
+    font-size: 2.5rem !important; /* Smaller than desktop but still impactful */
+    line-height: 1.1 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .mobile-hero-subtitle {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Hero text container positioning */
+  .hero-text-container {
+    transform-origin: bottom left;
+    overflow: hidden; /* Prevent text from going outside container */
+  }
+
+  /* Ensure text elements have proper transform origin */
+  .hero-text-container h1,
+  .hero-text-container p {
+    transform-origin: left bottom !important;
+    transition-timing-function: cubic-bezier(0.15, 0.25, 0.25, 1) !important;
+  }
+
+  /* Contact Section Mobile Fixes */
+  .mobile-contact-section {
+    min-height: auto !important;
+    height: auto !important;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Hide About page heading on mobile */
+  .mobile-hide-about-heading {
+    display: none !important;
+  }
+
+  /* Mobile project description formatting */
+  .mobile-project-description {
+    text-align: right !important;
+    line-height: 1.6 !important;
+  }
+
+  .mobile-project-description div {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* About page mobile spacing fixes */
+  .mobile-about-hero {
+    padding-top: 1rem !important; /* Further reduced from 2rem to 1rem */
+    padding-bottom: 1.5rem !important;
+  }
+
+  .mobile-about-heading-container {
+    margin-bottom: 1rem !important; /* Further reduced from 2rem to 1rem */
+  }
+
+  /* About page main heading typography enhancements */
+  .mobile-about-main-heading {
+    font-weight: 900 !important; /* Bolder - increased from font-bold */
+    font-size: 1.25rem !important; /* Match other paragraphs (text-xl) for consistency */
+    line-height: 1.2 !important;
+  }
+
+  /* Scroll animation for project items */
+  .project-scroll-animate {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .project-hidden {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+
+  .project-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Add a slight delay for staggered animation effect */
+  .project-scroll-animate:nth-child(even) {
+    transition-delay: 0.1s;
+  }
+
+  .project-scroll-animate:nth-child(3n) {
+    transition-delay: 0.2s;
+  }
+
+  /* Mobile contact grid adjustments */
+  .mobile-contact-grid {
+    gap: 2rem !important;
+  }
+
+  /* Mobile contact info text sizing */
+  .mobile-contact-heading {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .mobile-contact-text {
+    font-size: 1.125rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Mobile form adjustments */
+  .mobile-form-container {
+    padding: 0 !important;
+  }
+
+  .mobile-form-input {
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem !important;
+  }
+
+  .mobile-form-label {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .mobile-form-button {
+    padding: 1rem 2rem !important;
+    font-size: 1.125rem !important;
+  }
+
+  /* Prevent horizontal overflow */
+  .mobile-no-overflow {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* Mobile navigation adjustments */
+  .mobile-nav-logo {
+    font-size: 0.875rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Mobile projects grid adjustments */
+  .mobile-projects-text {
+    font-size: 0.875rem !important;
+    padding: 1rem !important;
+  }
+
+  /* Mobile logo styles */
+  .mobile-logo {
+    height: 5rem !important; /* 80px height for mobile - increased from 64px */
+    width: auto !important;
+    max-width: 500px !important; /* Increased max-width for larger logo */
+    object-fit: contain !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    /* Force transparent background for PNG images */
+    mix-blend-mode: normal !important;
+    /* Add subtle drop shadow for better visibility */
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+    /* Base transition - will be overridden by media query for mobile */
+    transition: filter 0.3s ease;
+  }
+
+  /* Specific fix for Next.js Image component transparency */
+  .mobile-logo img {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* Force transparency on the image element itself */
+  img.mobile-logo {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  .mobile-logo-container {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+  }
+
+  /* Mobile navigation styling - цвет управляется полностью из React компонента */
+  @media (max-width: 768px) {
+    /* Убираем все фиксированные цвета для мобильной навигации */
+    /* Теперь все цвета контролируются JavaScript логикой */
+
+    /* Только критически важное правило для открытого меню */
+    .mobile-menu-icon.bg-black {
+      background-color: #000000 !important; /* ЧЕРНЫЙ когда меню открыто */
+    }
+
+    /* Синхронизированная анимация для логотипа и бутерброда - 300ms */
+    .mobile-menu-button {
+      transition: color 0.3s ease-in-out !important;
+    }
+
+    .mobile-menu-icon {
+      /* Контролируем все свойства анимации для полной синхронизации */
+      transition: all 0.3s ease-in-out !important;
+    }
+
+    .mobile-logo {
+      /* Переопределяем для мобильной версии - полная синхронизация */
+      transition: all 0.3s ease-in-out !important;
+    }
+  }
+
+  /* Hide text logo on mobile, show image logo */
+  .mobile-hide-text-logo {
+    display: none !important;
+  }
+
+  .mobile-show-logo {
+    display: block !important;
+  }
+
+  /* Mobile hero text alignment changes - now handled by new positioning */
+  .mobile-hero-text-container {
+    text-align: left !important;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+    max-width: none !important;
+    margin-top: -10vh !important; /* Move text higher */
+    overflow: hidden; /* Prevent text from going outside container */
+  }
+
+  .mobile-hero-title-left {
+    text-align: left !important;
+  }
+
+  .mobile-hero-subtitle-left {
+    text-align: left !important;
+  }
+
+  /* Mobile hero text animation */
+  .mobile-hero-text-container h1,
+  .mobile-hero-text-container p {
+    transition-timing-function: cubic-bezier(0.15, 0.25, 0.25, 1) !important;
+  }
+
+  /* Mobile hero text container with animation - positioned at bottom left */
+  .mobile-hero-text-container-animated {
+    position: absolute !important;
+    bottom: 2rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    transform-origin: bottom left !important;
+    overflow: visible !important; /* Allow text to scale without clipping */
+    max-width: 350px !important; /* Further reduced to prevent overflow on mobile */
+    transition: all 2500ms cubic-bezier(0.15, 0.25, 0.25, 1) !important;
+  }
+
+  /* Initial state - text appears in the middle of screen */
+  .mobile-hero-text-container-animated.hero-text-initial {
+    bottom: 50vh !important;
+    transform: translateY(50%) scale(1.1) !important;
+  }
+
+  /* Final state - text moves to bottom with scale animation */
+  .mobile-hero-text-container-animated.hero-text-final {
+    bottom: 2rem !important;
+    transform: translateY(0) scale(1) !important;
+  }
+
+  .mobile-hero-text-container-animated h1,
+  .mobile-hero-text-container-animated p {
+    transform-origin: left bottom !important;
+    transition-timing-function: cubic-bezier(0.15, 0.25, 0.25, 1) !important;
+  }
+
+
+
+  /* Mobile stats section optimization */
+  .mobile-stats-section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .mobile-stats-grid {
+    gap: 1rem !important; /* Significantly reduced gap */
+  }
+
+  .mobile-stats-text {
+    text-align: right !important;
+    font-size: 1.25rem !important; /* Smaller text for more compact layout */
+    line-height: 1.3 !important;
+  }
+
+  /* Mobile menu full screen coverage */
+  .mobile-menu-full-width {
+    width: 100vw !important;
+    right: 0 !important;
+    left: 0 !important;
+  }
+
+  /* Mobile menu icon color overrides */
+  .mobile-menu-button {
+    /* Ensure proper z-index for mobile */
+    z-index: 50 !important;
+  }
+
+  /* Removed duplicate rule - handled in media query above */
+
+  /* Mobile projects section redesign */
+  .mobile-projects-section {
+    /* Override desktop grid layout */
+    display: block !important;
+  }
+
+  .mobile-projects-grid {
+    /* Single column layout */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin-bottom: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Override any hidden classes on mobile projects grid */
+  .mobile-projects-section .mobile-projects-grid {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .mobile-project-item {
+    /* Full width, square aspect ratio photos */
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    height: 100vw !important; /* Square aspect ratio: width = height */
+    position: relative !important;
+    overflow: hidden !important;
+    cursor: default !important; /* Remove pointer cursor */
+    pointer-events: none !important; /* Remove click functionality */
+  }
+
+  .mobile-project-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .mobile-project-text {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: white !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    line-height: 1.3 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    z-index: 10 !important;
+  }
+
+  .mobile-project-text-left {
+    left: 0 !important;
+    bottom: 2rem !important; /* Размещаем в нижней части */
+    top: auto !important; /* Отменяем центрирование по вертикали */
+    transform: none !important; /* Отменяем translateY(-50%) */
+    padding-left: 2rem !important;
+    padding-right: 1rem !important;
+    text-align: left !important;
+    max-width: calc(50% - 1rem) !important;
+  }
+
+  .mobile-project-text-right {
+    right: 0 !important;
+    padding-right: 2rem !important;
+    padding-left: 1rem !important;
+    text-align: right !important;
+    max-width: calc(50% - 1rem) !important;
+    /* Improved positioning for better right alignment */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: auto !important;
+  }
+
+  /* Hide desktop text blocks on mobile */
+  .mobile-hide-text-blocks {
+    display: none !important;
+  }
+
+  /* Mobile projects button - narrower width */
+  .mobile-projects-button {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    font-size: 1.25rem !important; /* Smaller text on mobile */
+    max-width: 280px !important; /* Limit maximum width */
+  }
+
+  /* Mobile projects button section - centered in white background */
+  .mobile-projects-button-section {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 160px !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Mobile projects button container - remove extra margins */
+  .mobile-projects-button-container {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Override section bottom padding for mobile projects section */
+  .mobile-projects-section {
+    padding-bottom: 0 !important;
+  }
+
+  /* Projects page specific mobile styling */
+  .mobile-project-item {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+
+  /* Ensure projects page mobile items are clickable */
+  .mobile-projects-section .mobile-project-item {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+
+  /* Fix projects page heading positioning on mobile - center the title */
+  .projects-page-header .text-center {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* Reduce heading size on mobile for projects page only */
+  .projects-page-header .text-8xl {
+    font-size: 3rem !important; /* Smaller to fit properly */
+    line-height: 1 !important;
+    text-align: center !important;
+  }
+
+  /* Center the button and filter container on mobile */
+  .projects-page-header .flex.items-center.justify-center.gap-4 {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+  }
+
+  /* Keep project photo sizes but ensure they fit on mobile */
+  .projects-grid .w-80 {
+    width: 16rem !important; /* Slightly smaller but still substantial */
+    flex-shrink: 0 !important;
+  }
+
+  /* Also reduce text sizes on mobile for projects page only */
+  .projects-grid .text-3xl {
+    font-size: 1.25rem !important; /* Smaller text on mobile */
+    line-height: 1.2 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+
+  /* Ensure project info container has proper spacing and doesn't overflow */
+  .projects-grid .flex-grow {
+    padding: 0.5rem !important;
+    min-width: 0 !important; /* Allow flex item to shrink below content size */
+    overflow: hidden !important;
+  }
+
+  /* Keep original layout but fix text overflow */
+  .projects-grid .space-y-4 {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Show mobile projects layout, hide desktop grid */
+  .mobile-projects-grid {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Force mobile projects grid to show with maximum specificity */
+  section.mobile-projects-section .mobile-projects-grid {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex-direction: column !important;
+  }
+
+  .mobile-hide-desktop-grid {
+    display: none !important;
+  }
+
+  /* Specific text line breaking optimizations for mobile project overlays */
+  .mobile-project-text-optimized-1 {
+    /* For "Молодая десятка из Москвы и Казани" - reduce from 6 to 4 lines */
+    font-size: 1.4rem !important;
+    line-height: 1.2 !important;
+    word-spacing: -0.1em !important;
+  }
+
+  .mobile-project-text-optimized-7 {
+    /* For "коммерцию и частные дома по всей России" - reduce from 6 to 5 lines */
+    font-size: 1.4rem !important;
+    line-height: 1.25 !important;
+    word-spacing: -0.05em !important;
+  }
+
+  /* Mobile "О НАС" project card styling */
+  .mobile-project-about-link {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .mobile-project-about-link:hover {
+    transform: scale(1.02) !important;
+  }
+
+  .mobile-project-text-center {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(-50%) !important;
+    text-align: center !important;
+    max-width: 80% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    color: white !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    line-height: 1.3 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    z-index: 10 !important;
+  }
+
+  .mobile-project-about-text {
+    font-size: 2rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.2em !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(-50%) !important;
+    text-align: center !important;
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    z-index: 10 !important;
+  }
+
+  .mobile-project-about-text::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -4px !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 2px !important;
+    background-color: white !important;
+    transition: width 0.5s ease-out !important;
+  }
+
+  .mobile-project-about-link:hover .mobile-project-about-text::after {
+    width: 100% !important;
+  }
+
+  /* Mobile filters - ensure all filters are visible with smooth animation */
+  .mobile-filters-container {
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out !important;
+  }
+
+  /* When filters are open, allow full height but with smooth transition */
+  .mobile-filters-container.filter-open {
+    max-height: 100vh !important;
+  }
+
+  .mobile-filters-wrapper {
+    overflow-x: hidden !important;
+  }
+
+  .mobile-filters-wrapper.filter-open {
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  /* Ensure filter buttons wrap properly on mobile */
+  .mobile-filter-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    max-height: none !important;
+  }
+
+  /* Section Navigation Mobile Styles */
+  .section-navigation {
+    right: 1rem !important;
+    top: 50% !important; /* Center vertically on mobile */
+  }
+
+  .section-navigation .flex {
+    gap: 0.75rem !important; /* Reduce spacing on mobile */
+  }
+
+  .section-navigation button {
+    width: 0.75rem !important; /* 12px */
+    height: 0.75rem !important; /* 12px */
+  }
+
+  /* Hide tooltips on mobile to prevent layout issues */
+  .section-navigation .absolute.right-full {
+    display: none !important;
+  }
+
+  /* About page team section mobile optimizations */
+  .about-team-founder {
+    max-width: 280px !important; /* Smaller founder card on mobile */
+  }
+
+  .about-team-founder h3 {
+    font-size: 1.5rem !important; /* Smaller founder name on mobile */
+    line-height: 1.2 !important;
+  }
+
+  .about-team-grid {
+    gap: 1.5rem !important; /* Smaller gaps on mobile */
+  }
+
+  .about-team-member h3 {
+    font-size: 1rem !important; /* Smaller member names on mobile */
+    line-height: 1.2 !important;
+  }
+}
+
+/* Team section styles for both desktop and mobile */
+.team-photo-container {
+  border-radius: 0 !important; /* Remove rounded corners */
+  background-color: #f5f5f5 !important; /* Light background for letterboxing */
+}
+
+.team-photo-container img {
+  object-fit: contain !important; /* Show full image without cropping */
+  object-position: center !important;
+  border-radius: 0 !important; /* Remove rounded corners from images */
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Desktop team layout styles */
+@media (min-width: 769px) {
+  .team-photo-container {
+    border-radius: 0 !important; /* Ensure no rounded corners on desktop */
+  }
+
+  .team-photo-container img {
+    border-radius: 0 !important; /* Ensure no rounded corners on desktop images */
+    object-fit: contain !important; /* Show full image without cropping on desktop */
+  }
+
+  /* Founder photo container - tall as two rows */
+  .founder-photo-container {
+    aspect-ratio: 1 / 2 !important; /* Make it twice as tall */
+    border-radius: 0 !important;
+    background-color: #f5f5f5 !important;
+  }
+
+  .founder-photo-container img {
+    object-fit: contain !important;
+    object-position: center !important;
+    border-radius: 0 !important;
+  }
+
+  /* New desktop team styles - natural image sizes */
+  .founder-photo-container-new {
+    border-radius: 0 !important;
+    background-color: #f5f5f5 !important;
+    width: auto !important;
+    height: auto !important;
+    display: inline-block !important;
+  }
+
+  .founder-image-new {
+    object-fit: contain !important; /* Changed back to contain to prevent cropping */
+    object-position: center !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .founder-image-new:hover {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .team-photo-container-new {
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    width: 280px !important; /* Fixed container width like Abramova Kira */
+    height: 280px !important; /* Fixed container height like Abramova Kira */
+    display: flex !important; /* Changed from inline-block to flex like Abramova Kira */
+    align-items: center !important; /* Center content like Abramova Kira */
+    justify-content: center !important; /* Center content like Abramova Kira */
+    overflow: hidden !important; /* Hide cropped parts like Abramova Kira */
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    position: relative !important; /* Add position relative like Abramova Kira */
+  }
+
+  .team-photo-container-new:hover {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .team-image-new {
+    object-fit: cover !important; /* Changed from contain to cover like Abramova Kira */
+    object-position: center !important;
+    border-radius: 0 !important;
+    width: 280px !important; /* Fixed width like Abramova Kira */
+    height: 280px !important; /* Fixed height like Abramova Kira */
+    max-width: none !important; /* Remove width restrictions like Abramova Kira */
+    display: block !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .team-image-new:hover {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* Founder photo container - sized to match team grid height exactly */
+  .founder-photo-container-new {
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    width: auto !important; /* Auto width to match image size and prevent cropping */
+    height: 576px !important; /* Base: 280px * 2 + 3rem gap (48px) + mb-4 (16px) = 624px, adjusted to 576px for perfect alignment */
+    display: flex !important; /* Changed to flex for better control */
+    align-items: center !important; /* Center the image vertically */
+    justify-content: center !important; /* Center the image horizontally */
+    overflow: hidden !important; /* Hidden to prevent scaling from increasing overall area */
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .founder-photo-container-new:hover {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Desktop team layout - founder and team alignment */
+  .desktop-team-layout {
+    padding-left: 4rem !important; /* Base left padding for symmetry */
+    padding-right: 4rem !important; /* Base right padding for symmetry */
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-team-layout {
+      padding-left: 5rem !important; /* LG left padding */
+      padding-right: 5rem !important; /* LG right padding */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .desktop-team-layout {
+      padding-left: 6rem !important; /* XL left padding */
+      padding-right: 6rem !important; /* XL right padding */
+    }
+  }
+
+  /* Desktop team grid - perfect 3x2 alignment */
+  .desktop-team-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-rows: repeat(2, auto) !important;
+    column-gap: 4rem !important; /* Equal horizontal spacing */
+    row-gap: 3rem !important; /* Vertical spacing between rows */
+    align-items: start !important;
+    justify-items: center !important;
+    width: 100% !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-team-grid {
+      column-gap: 5rem !important;
+      row-gap: 4rem !important;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .desktop-team-grid {
+      column-gap: 6rem !important;
+      row-gap: 5rem !important;
+    }
+  }
+
+  /* Ensure all team members are perfectly centered in their grid cells */
+  .desktop-team-member {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    justify-self: center !important;
+  }
+
+  /* Make sure team photo containers align properly */
+  .team-photo-container-new {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 280px !important; /* Minimum height for alignment */
+  }
+
+  /* Comprehensive removal of all borders, backgrounds, and visual artifacts */
+  .team-photo-container-new,
+  .founder-photo-container-new,
+  .team-image-new,
+  .founder-image-new {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  .team-photo-container-new:hover,
+  .founder-photo-container-new:hover,
+  .team-image-new:hover,
+  .founder-image-new:hover {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  /* Ensure no parent containers create backgrounds */
+  .group:hover .team-photo-container-new,
+  .group:hover .founder-photo-container-new {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure consistent spacing in team grid */
+  .desktop-team-grid {
+    gap: 4rem 5rem !important; /* Vertical gap 4rem, horizontal gap 5rem */
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-team-grid {
+      gap: 3rem 4rem !important; /* Smaller gaps on large screens */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .desktop-team-grid {
+      gap: 4rem 5rem !important; /* Larger gaps on extra large screens */
+    }
+  }
+
+  /* Founder image - full image without cropping, but controlled scaling */
+  .founder-height-responsive {
+    height: 576px !important; /* Match container height exactly */
+    width: auto !important; /* Auto width to maintain aspect ratio and prevent cropping */
+    max-width: none !important; /* Remove width restrictions */
+    object-fit: contain !important; /* Contain to show full image without cropping */
+    object-position: center !important; /* Center the image content */
+    display: block !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    transition: transform 0.5s ease !important; /* Ensure smooth transition */
+  }
+
+  /* Ensure founder hover effect matches team members exactly */
+  .group:hover .founder-height-responsive {
+    transform: scale(1.05) !important; /* Same scale as team members */
+  }
+
+  /* Additional spacing for founder name to prevent overlap */
+  .founder-photo-container-new {
+    margin-bottom: 0.67rem !important; /* Further reduced spacing below founder photo (1.33rem / 2) */
+  }
+
+  @media (min-width: 1024px) {
+    .founder-photo-container-new {
+      height: 640px !important; /* LG: 280px * 2 + 4rem gap (64px) + mb-4 (16px) = 640px */
+    }
+    .founder-height-responsive {
+      height: 640px !important; /* Match container height */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .founder-photo-container-new {
+      height: 656px !important; /* XL: 280px * 2 + 5rem gap (80px) + mb-4 (16px) = 656px */
+    }
+    .founder-height-responsive {
+      height: 656px !important; /* Match container height */
+    }
+  }
+
+  /* Removed special styling for Abramova Kira - now all team members have unified styling */
+}
+
+/* Mobile team styles */
+@media (max-width: 768px) {
+  .team-photo-container img {
+    object-fit: contain !important; /* Show full image without cropping on mobile */
+  }
+
+  /* Mobile position text - white text without background */
+  .mobile-position-text {
+    background: none !important;
+    background-color: transparent !important;
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important; /* Add text shadow for readability */
+  }
+
+  /* New mobile team styles - consistent margins like Abramova Kira */
+  .mobile-team-container-wrapper {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  .mobile-team-member-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+
+  .mobile-team-photo-container {
+    aspect-ratio: 1 / 1 !important; /* Keep square aspect ratio */
+    border-radius: 0 !important;
+    background-color: #f5f5f5 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important; /* Ensure no overflow */
+    position: relative !important;
+  }
+
+  .mobile-team-image {
+    object-fit: cover !important; /* Fill the container completely */
+    object-position: center !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  /* Team member scroll animation for mobile */
+  .team-scroll-animate {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .team-hidden {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+
+  .team-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Add a slight delay for staggered animation effect */
+  .team-scroll-animate:nth-child(even) {
+    transition-delay: 0.1s;
+  }
+
+  .team-scroll-animate:nth-child(3n) {
+    transition-delay: 0.2s;
+  }
+}
+
+/* Navigation Z-Index Fixes */
+nav {
+  /* Ensure navigation always stays on top */
+  z-index: 100 !important;
+  position: fixed !important;
+}
+
+/* Ensure navigation elements maintain proper stacking */
+.mobile-menu-button {
+  z-index: 110 !important;
+  position: relative !important;
+}
+
+/* Prevent project hover effects from interfering with navigation */
+.projects-grid .group:hover {
+  /* Limit z-index to prevent navigation conflicts */
+  z-index: 20 !important;
+}
+
+/* Enhanced navigation visibility */
+nav .mobile-hide-text-logo {
+  /* Add text shadow for better visibility on all backgrounds */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Desktop navigation menu icon styles */
+@media (min-width: 769px) {
+  nav .mobile-menu-icon {
+    /* Add subtle shadow for better visibility */
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    transition: background-color 0.3s ease-in-out, filter 0.3s ease-in-out;
+  }
+}
+
+/* Section Navigation Desktop and General Styles */
+.section-navigation {
+  animation: slideInFromRight 0.8s ease-out;
+  /* Ensure section navigation stays below main navigation */
+  z-index: 60 !important;
+}
+
+.section-navigation .group {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px) translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(-50%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-navigation button {
+  /* Smooth transitions for all interactions including color changes */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+.section-navigation button:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.section-navigation button:active:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.section-navigation button:disabled {
+  cursor: not-allowed;
+}
+
+/* Tooltip animations and styles */
+.section-navigation .group:hover .absolute {
+  animation: fadeInTooltip 0.2s ease-out;
+}
+
+@keyframes fadeInTooltip {
+  from {
+    opacity: 0;
+    transform: translateX(10px) translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(-50%);
+  }
+}

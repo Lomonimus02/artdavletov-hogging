@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест фильтров проектов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .filters {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        .filter-group h3 {
+            margin: 0 0 10px 0;
+        }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .filter-btn.active {
+            background: #007bff;
+            color: white;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .project {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: white;
+        }
+        .project h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .project-info {
+            color: #666;
+            font-size: 14px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест динамических фильтров проектов</h1>
+    
+    <div class="filters">
+        <div class="filter-group">
+            <h3>Тип проекта</h3>
+            <div class="filter-buttons" id="typeFilters">
+                <button class="filter-btn active" data-type="">Все</button>
+            </div>
+        </div>
+        
+        <div class="filter-group">
+            <h3>Город</h3>
+            <div class="filter-buttons" id="cityFilters">
+                <button class="filter-btn active" data-city="">Все</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="projectsContainer">
+        <div class="loading">Загрузка проектов...</div>
+    </div>
+
+    <script>
+        let allProjects = [];
+        let availableCities = [];
+        let selectedType = '';
+        let selectedCity = '';
+
+        // Загрузка данных
+        async function loadData() {
+            try {
+                // Пробуем разные порты
+                const ports = [3000, 3001, 8080];
+                let data = null;
+                
+                for (const port of ports) {
+                    try {
+                        const response = await fetch(`http://localhost:${port}/api/projects`);
+                        if (response.ok) {
+                            data = await response.json();
+                            console.log(`Данные загружены с порта ${port}:`, data);
+                            break;
+                        }
+                    } catch (e) {
+                        console.log(`Порт ${port} недоступен`);
+                    }
+                }
+                
+                if (!data) {
+                    throw new Error('API недоступен');
+                }
+                
+                // Проверяем новый формат API (с projects и cities) или старый (массив проектов)
+                if (data.projects && data.cities) {
+                    allProjects = data.projects;
+                    availableCities = data.cities;
+                } else if (Array.isArray(data)) {
+                    // Обратная совместимость со старым форматом
+                    allProjects = data;
+                    // Извлекаем города из проектов
+                    availableCities = [...new Set(
+                        data.map(project => project.city).filter(city => city && city.trim() !== '')
+                    )].sort();
+                }
+                
+                console.log('Проекты:', allProjects);
+                console.log('Доступные города:', availableCities);
+                
+                setupFilters();
+                renderProjects();
+                
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+                document.getElementById('projectsContainer').innerHTML = 
+                    '<div class="loading">Ошибка загрузки данных. Проверьте консоль.</div>';
+            }
+        }
+
+        // Настройка фильтров
+        function setupFilters() {
+            // Типы проектов
+            const types = [...new Set(allProjects.map(p => p.type))];
+            const typeFilters = document.getElementById('typeFilters');
+            types.forEach(type => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.textContent = type;
+                btn.dataset.type = type;
+                btn.onclick = () => selectType(type);
+                typeFilters.appendChild(btn);
+            });
+
+            // Города
+            const cityFilters = document.getElementById('cityFilters');
+            availableCities.forEach(city => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.textContent = city;
+                btn.dataset.city = city;
+                btn.onclick = () => selectCity(city);
+                cityFilters.appendChild(btn);
+            });
+        }
+
+        // Выбор типа
+        function selectType(type) {
+            selectedType = type;
+            document.querySelectorAll('[data-type]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === type);
+            });
+            renderProjects();
+        }
+
+        // Выбор города
+        function selectCity(city) {
+            selectedCity = city;
+            document.querySelectorAll('[data-city]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.city === city);
+            });
+            renderProjects();
+        }
+
+        // Отображение проектов
+        function renderProjects() {
+            const filtered = allProjects.filter(project => {
+                const typeMatch = !selectedType || project.type === selectedType;
+                const cityMatch = !selectedCity || project.city === selectedCity;
+                return typeMatch && cityMatch;
+            });
+
+            const container = document.getElementById('projectsContainer');
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="loading">Проекты не найдены</div>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="projects">
+                    ${filtered.map(project => `
+                        <div class="project">
+                            <h3>${project.title}</h3>
+                            <div class="project-info">
+                                <div><strong>Категория:</strong> ${project.category}</div>
+                                <div><strong>Тип:</strong> ${project.type}</div>
+                                <div><strong>Город:</strong> ${project.city}</div>
+                                <div><strong>Площадь:</strong> ${project.area}</div>
+                                <div><strong>Год:</strong> ${project.year}</div>
+                                <div><strong>Раздел:</strong> ${project.section}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Запуск
+        loadData();
+    </script>
+</body>
+</html>
