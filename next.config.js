@@ -4,6 +4,15 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
 
+  // Webpack configuration for path aliases
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': require('path').resolve(__dirname, 'src'),
+    };
+    return config;
+  },
+
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],
