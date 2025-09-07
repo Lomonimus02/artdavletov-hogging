@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Test - Team Section</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        
+        .test-info {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .viewport-info {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .resolution-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Simulate the team section styles - DESKTOP ORIGINAL SIZES */
+        .desktop-team-layout {
+            display: flex;
+            gap: 4rem;
+            align-items: start;
+            justify-content: center;
+            padding: 4rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .desktop-team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem 4rem;
+            max-width: 1000px;
+            margin-left: 3rem;
+        }
+        
+        .team-photo-container-new {
+            width: 280px;
+            height: 280px;
+            background: #ddd;
+            border: 2px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .founder-photo-container-new {
+            width: 280px;
+            height: 611px; /* Updated to align with bottom row */
+            background: #ccc;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Desktop restoration styles - FORCE ORIGINAL SIZES + IMPROVEMENTS */
+        @media (min-width: 1367px) {
+            .desktop-team-layout {
+                gap: 4rem !important;
+                padding: 4rem !important;
+                justify-content: center !important;
+                align-items: flex-end !important; /* Align to bottom */
+            }
+
+            .desktop-team-grid {
+                column-gap: 4rem !important;
+                row-gap: 3rem !important;
+                max-width: 1000px !important;
+                margin-left: 1rem !important; /* Shifted left from 3rem */
+            }
+
+            .team-photo-container-new {
+                width: 280px !important;
+                height: 280px !important;
+            }
+
+            .founder-photo-container-new {
+                width: 280px !important;
+                height: 611px !important; /* Increased to align with bottom row */
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .desktop-team-layout {
+                padding: 5rem !important;
+            }
+
+            .desktop-team-grid {
+                column-gap: 5rem !important;
+                row-gap: 4rem !important;
+                margin-left: 4rem !important;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .desktop-team-layout {
+                padding: 6rem !important;
+            }
+
+            .desktop-team-grid {
+                column-gap: 6rem !important;
+                row-gap: 5rem !important;
+                margin-left: 5rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <div class="viewport-info">Current Viewport: <span id="viewport"></span></div>
+        <div class="resolution-info">Screen Resolution: <span id="screen"></span></div>
+        <div class="resolution-info">Device Type: <span id="device-type"></span></div>
+    </div>
+    
+    <div class="desktop-team-layout">
+        <div class="founder-photo-container-new">
+            FOUNDER<br>Давлетов Артём<br>DESKTOP IMPROVED<br>280x611px<br>(ALIGNED TO BOTTOM)
+        </div>
+        <div class="desktop-team-grid">
+            <div class="team-photo-container-new">Валиуллина<br>Сабина<br>DESKTOP<br>280x280px</div>
+            <div class="team-photo-container-new">Антюхова<br>Елизавета<br>DESKTOP<br>280x280px</div>
+            <div class="team-photo-container-new">Котельникова<br>Алёна<br>DESKTOP<br>280x280px</div>
+            <div class="team-photo-container-new">Латыпова<br>Элеонора<br>DESKTOP<br>280x280px</div>
+            <div class="team-photo-container-new">Абрамова<br>Кира<br>DESKTOP<br>280x280px</div>
+            <div class="team-photo-container-new">Шаяхметова<br>Сабина<br>DESKTOP<br>280x280px</div>
+        </div>
+    </div>
+
+    <script>
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            document.getElementById('viewport').textContent = width + 'x' + height;
+            document.getElementById('screen').textContent = screen.width + 'x' + screen.height;
+            
+            let deviceType = 'Unknown';
+            if (width >= 1367) {
+                deviceType = 'DESKTOP (1367px+)';
+            } else if (width >= 1280 && width <= 1366 && height <= 900) {
+                deviceType = 'TABLET LANDSCAPE (1280-1366px, ≤900px height)';
+            } else if (width >= 1024 && width <= 1279 && height <= 900) {
+                deviceType = 'TABLET LANDSCAPE (1024-1279px, ≤900px height)';
+            } else if (width >= 768) {
+                deviceType = 'TABLET';
+            } else {
+                deviceType = 'MOBILE';
+            }
+            
+            document.getElementById('device-type').textContent = deviceType;
+        }
+        
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+    </script>
+</body>
+</html>

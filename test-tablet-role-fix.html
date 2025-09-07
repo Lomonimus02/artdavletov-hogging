@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablet Role Fix Test - Team Section</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        
+        .test-info {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .viewport-info {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .status-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        /* Simulate the team section styles */
+        .desktop-team-layout {
+            display: flex;
+            gap: 4rem;
+            align-items: start;
+            justify-content: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .desktop-team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 600px;
+        }
+        
+        .team-photo-container-new {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            background: #ddd;
+            border: 2px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            overflow: hidden;
+        }
+        
+        .team-image-new {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        
+        .founder-photo-container-new {
+            width: 280px;
+            height: 576px;
+            background: #ccc;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        /* Role overlay styles */
+        .role-overlay {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transform: translateY(16px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 20;
+            pointer-events: none;
+        }
+        
+        .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .click-indicator {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            z-index: 20;
+            pointer-events: none;
+            font-size: 12px;
+        }
+        
+        /* Desktop behavior */
+        @media (min-width: 1367px) {
+            .team-photo-container-new:hover .gradient-overlay {
+                opacity: 1;
+            }
+            
+            .team-photo-container-new:hover .role-overlay.desktop-only-role {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .team-photo-container-new:hover .team-image-new {
+                transform: scale(1.05);
+            }
+            
+            .tablet-only-role {
+                display: none !important;
+            }
+            
+            .click-indicator {
+                display: none;
+            }
+        }
+        
+        /* Tablet behavior */
+        @media (max-width: 1366px) and (orientation: landscape) and (max-height: 900px) {
+            .team-photo-container-new:hover {
+                transform: scale(1.02);
+            }
+            
+            .team-photo-container-new:active {
+                transform: scale(0.98);
+            }
+            
+            .team-photo-container-new.active .role-overlay.tablet-only-role {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .team-photo-container-new.active .gradient-overlay {
+                opacity: 1;
+            }
+            
+            .desktop-only-role {
+                display: none !important;
+            }
+            
+            /* iPad 1280x853 specific styles */
+            .desktop-team-layout {
+                gap: 2.5rem !important;
+                max-width: 1000px !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+                margin: 0 auto !important;
+                margin-left: -1rem !important;
+                justify-content: center !important;
+            }
+            
+            .desktop-team-grid {
+                column-gap: 2rem !important;
+                row-gap: 1.8rem !important;
+                max-width: 650px !important;
+                margin-left: 0.5rem !important;
+                margin-right: 0 !important;
+            }
+            
+            .team-photo-container-new {
+                width: 238px !important;
+                height: 238px !important;
+                font-size: 10px !important;
+            }
+            
+            .founder-photo-container-new {
+                height: 510px !important;
+                width: 238px !important;
+                font-size: 10px !important;
+            }
+        }
+        
+        .pointer-events-none {
+            pointer-events: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <div class="viewport-info">Current Viewport: <span id="viewport"></span></div>
+        <div class="status-info">Device Type: <span id="device-type"></span></div>
+        <div class="status-info">Active Member: <span id="active-member">None</span></div>
+        <div class="status-info">Click Count: <span id="click-count">0</span></div>
+    </div>
+    
+    <div class="desktop-team-layout">
+        <div class="founder-photo-container-new">
+            FOUNDER<br>Давлетов Артём<br>280x576<br>→ 238x510<br>(1.7x LARGER)
+        </div>
+        <div class="desktop-team-grid">
+            <div class="team-photo-container-new" data-member="1">
+                <div class="gradient-overlay"></div>
+                <div class="team-image-new">Валиуллина<br>Сабина<br>280→238px</div>
+                <div class="role-overlay desktop-only-role">Ведущий арт-директор</div>
+                <div class="role-overlay tablet-only-role">Ведущий арт-директор</div>
+                <div class="click-indicator">👆</div>
+            </div>
+            
+            <div class="team-photo-container-new" data-member="2">
+                <div class="gradient-overlay"></div>
+                <div class="team-image-new">Антюхова<br>Елизавета<br>280→238px</div>
+                <div class="role-overlay desktop-only-role">Арт-директор</div>
+                <div class="role-overlay tablet-only-role">Арт-директор</div>
+                <div class="click-indicator">👆</div>
+            </div>
+            
+            <div class="team-photo-container-new" data-member="3">
+                <div class="gradient-overlay"></div>
+                <div class="team-image-new">Котельникова<br>Алёна<br>280→238px</div>
+                <div class="role-overlay desktop-only-role">Архитектор-дизайнер</div>
+                <div class="role-overlay tablet-only-role">Архитектор-дизайнер</div>
+                <div class="click-indicator">👆</div>
+            </div>
+            
+            <div class="team-photo-container-new" data-member="4">
+                <div class="gradient-overlay"></div>
+                <div class="team-image-new">Латыпова<br>Элеонора<br>280→238px</div>
+                <div class="role-overlay desktop-only-role">Архитектор</div>
+                <div class="role-overlay tablet-only-role">Архитектор</div>
+                <div class="click-indicator">👆</div>
+            </div>
+            
+            <div class="team-photo-container-new" data-member="5">
+                <div class="gradient-overlay"></div>
+                <div class="team-image-new">Абрамова<br>Кира<br>280→238px</div>
+                <div class="role-overlay desktop-only-role">Архитектор</div>
+                <div class="role-overlay tablet-only-role">Архитектор</div>
+                <div class="click-indicator">👆</div>
+            </div>
+            
+            <div class="team-photo-container-new" data-member="6">
+                <div class="gradient-overlay"></div>
+                <div class="team-image-new">Шаяхметова<br>Сабина<br>280→238px</div>
+                <div class="role-overlay desktop-only-role">Архитектор</div>
+                <div class="role-overlay tablet-only-role">Архитектор</div>
+                <div class="click-indicator">👆</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeRole = null;
+        let clickCount = 0;
+        
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            document.getElementById('viewport').textContent = width + 'x' + height;
+            
+            let deviceType = 'Unknown';
+            let isTablet = false;
+            
+            if (width >= 1367) {
+                deviceType = 'DESKTOP (1367px+) - Hover to show roles';
+            } else if (width >= 1024 && width <= 1366 && height <= 900) {
+                deviceType = 'TABLET LANDSCAPE - Click to show roles';
+                isTablet = true;
+            } else if (width >= 768) {
+                deviceType = 'TABLET - Click to show roles';
+                isTablet = true;
+            } else {
+                deviceType = 'MOBILE';
+            }
+            
+            document.getElementById('device-type').textContent = deviceType;
+            
+            // Handle tablet click logic
+            if (isTablet) {
+                const members = document.querySelectorAll('.team-photo-container-new');
+                members.forEach(member => {
+                    member.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        clickCount++;
+                        document.getElementById('click-count').textContent = clickCount;
+                        
+                        const memberId = this.getAttribute('data-member');
+                        
+                        // Remove active class from all members
+                        members.forEach(m => m.classList.remove('active'));
+                        
+                        // If clicking the same member, hide the role; otherwise show the new one
+                        if (activeRole === memberId) {
+                            activeRole = null;
+                            document.getElementById('active-member').textContent = 'None';
+                        } else {
+                            activeRole = memberId;
+                            this.classList.add('active');
+                            document.getElementById('active-member').textContent = 'Member ' + memberId;
+                        }
+                    });
+                });
+            }
+        }
+        
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+    </script>
+</body>
+</html>

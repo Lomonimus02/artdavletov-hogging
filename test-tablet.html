@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablet Test - Team Section</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        
+        .test-info {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .viewport-info {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .resolution-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Simulate the team section styles */
+        .desktop-team-layout {
+            display: flex;
+            gap: 4rem;
+            align-items: start;
+            justify-content: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .desktop-team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 600px;
+        }
+        
+        .team-photo-container-new {
+            width: 280px;
+            height: 280px;
+            background: #ddd;
+            border: 2px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .founder-photo-container-new {
+            width: 280px;
+            height: 576px;
+            background: #ccc;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        /* iPad 1280x853 styles - MUCH LARGER SIZES (1.7x) + BETTER CENTERING */
+        @media (min-width: 1280px) and (max-width: 1366px) and (orientation: landscape) {
+            body {
+                min-height: 100vh; /* Reduced height */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start; /* Move content down */
+                padding-top: 8rem; /* Push content down */
+                padding-bottom: 2rem; /* Reduce bottom space */
+            }
+
+            .desktop-team-layout {
+                gap: 2.5rem !important;
+                max-width: 1000px !important; /* Much wider */
+                padding-left: 1rem !important; /* Balanced padding */
+                padding-right: 1rem !important; /* Balanced padding */
+                margin: 0 auto !important; /* Center the layout */
+                margin-left: -1rem !important; /* Slight left shift for better centering */
+                justify-content: center !important; /* Center alignment */
+            }
+
+            .desktop-team-grid {
+                column-gap: 2rem !important; /* Increased gaps */
+                row-gap: 1.8rem !important;
+                max-width: 650px !important; /* Much wider for larger photos */
+                margin-left: 0.5rem !important; /* Slight left shift */
+                margin-right: 0 !important;
+            }
+
+            /* MUCH LARGER PHOTOS - 1.7x increase: 140px * 1.7 = 238px */
+            .team-photo-container-new {
+                width: 238px !important;
+                height: 238px !important;
+                font-size: 10px !important; /* Smaller text for larger boxes */
+            }
+
+            /* MUCH LARGER FOUNDER PHOTO - 1.7x increase: 300px * 1.7 = 510px */
+            .founder-photo-container-new {
+                height: 510px !important;
+                width: 238px !important;
+                font-size: 10px !important; /* Smaller text for larger boxes */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <div class="viewport-info">Current Viewport: <span id="viewport"></span></div>
+        <div class="resolution-info">Screen Resolution: <span id="screen"></span></div>
+        <div class="resolution-info">Orientation: <span id="orientation"></span></div>
+    </div>
+    
+    <div class="desktop-team-layout">
+        <div class="founder-photo-container-new">
+            FOUNDER<br>Давлетов Артём<br>280x576<br>→ 238x510<br>(1.7x LARGER)
+        </div>
+        <div class="desktop-team-grid">
+            <div class="team-photo-container-new">Валиуллина<br>Сабина<br>280→238px<br>(1.7x LARGER)</div>
+            <div class="team-photo-container-new">Антюхова<br>Елизавета<br>280→238px<br>(1.7x LARGER)</div>
+            <div class="team-photo-container-new">Котельникова<br>Алёна<br>280→238px<br>(1.7x LARGER)</div>
+            <div class="team-photo-container-new">Латыпова<br>Элеонора<br>280→238px<br>(1.7x LARGER)</div>
+            <div class="team-photo-container-new">Абрамова<br>Кира<br>280→238px<br>(1.7x LARGER)</div>
+            <div class="team-photo-container-new">Шаяхметова<br>Сабина<br>280→238px<br>(1.7x LARGER)</div>
+        </div>
+    </div>
+
+    <script>
+        function updateViewportInfo() {
+            document.getElementById('viewport').textContent = window.innerWidth + 'x' + window.innerHeight;
+            document.getElementById('screen').textContent = screen.width + 'x' + screen.height;
+            document.getElementById('orientation').textContent = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+        }
+        
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+    </script>
+</body>
+</html>
